@@ -19,19 +19,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <title>Bootstrap Admin Theme</title>
 
-    <link href="${basePath}bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${basePath}bower_components/bootstrap-table/bootstrap-table.css" rel="stylesheet">
-    <link href="${basePath}bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="${basePath}css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap-table/bootstrap-table.css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
 	
-	<script src="${basePath}js/jquery-2.2.0.min.js"></script>
-    <script src="${basePath}bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="${basePath}bower_components/bootstrap-table/bootstrap-table.js"></script>
-    <script src="${basePath}bower_components/bootstrap-table/bootstrap-table-export.js"></script>
-    <script src="${basePath}bower_components/extends/tableExport/jquery.base64.js"></script>
-    <script src="${basePath}bower_components/extends/tableExport/tableExport.js"></script>
+	<script src="js/jquery-2.2.0.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/bootstrap-table/bootstrap-table.js"></script>
+    <script src="bower_components/bootstrap-table/bootstrap-table-export.js"></script>
+    <script src="bower_components/extends/tableExport/jquery.base64.js"></script>
+    <script src="bower_components/extends/tableExport/tableExport.js"></script>
     
-    <script src="${basePath}js/jquery.autocomplete.js"></script>
+    <script src="js/jquery.autocomplete.js"></script>
 </head>
 <script type="text/javascript">
 		$(function () {
@@ -162,26 +162,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </button>
                 <a class="navbar-brand" href="index.html">欢迎您，${username}。</a>
             </div>
-            <!-- /.navbar-header -->
 
-          <%--   <ul class="nav navbar-top-links navbar-right">
+          <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" href="#">
                         <i class="fa fa-envelope fa-fw"></i><i class="fa fa-caret-down"></i>
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" href="#">
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" href="#">
                         <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
@@ -216,7 +215,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
-            </ul> --%>
+            </ul>
             <!-- /.navbar-top-links -->
         </nav>
         
@@ -235,7 +234,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
 		<div id="content-body" style="width:78%;float:right;">
-			<h4>用户列表</h4>
+			<span>用户管理   > 用户列表</span>
 			<div id="reportTableDiv" class="span10">
 				<table id="reportTable">
 				</table>

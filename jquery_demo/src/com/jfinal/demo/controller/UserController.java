@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.jfinal.core.Controller;
 import com.jfinal.demo.model.User;
-import com.jfinal.json.Json;
 import com.jfinal.kit.JsonKit;
 
 public class UserController extends Controller {
@@ -30,20 +29,28 @@ public class UserController extends Controller {
 		List<User> users = getUsers(sql);
 		if (users.size() <= 0) {
 			getRequest().setAttribute("message", "用户名不存在");
-			render("/login.jsp");
+			forwardAction("/user/forwardLogin");
 		}else {
 			getSession().setAttribute("username", users.get(0).getUsername());
 			sql += " and password = '" + password + "'" ;
 			users = User.dao.find(sql);
 			if (users.size() > 0) {
 				getSession().setAttribute("nickname", users.get(0).getNickname());
-				redirect("/pages/index.jsp");
+				forwardAction("/user/forwardMgr");
 			}else {
 				getRequest().setAttribute("message", "密码错误");
-				render("/login.jsp");
+				forwardAction("/user/forwardLogin");
 			}
 		}
 	}
+	
+	/**
+	 * 跳转到后台管理页面
+	 */
+	public void forwardMgr(){
+		redirect("/pages/index.jsp");
+	}
+	
 	
 	/**
 	 * 跳转到注册页面
@@ -65,7 +72,8 @@ public class UserController extends Controller {
 			if (flag) {
 				forwardLogin();
 			}else {
-				render("/register.jsp");
+				/*render("/register.jsp");*/
+				forwardAction("/user/forwardRegister");
 			}
 		}
 	}
@@ -115,6 +123,9 @@ public class UserController extends Controller {
 		return users;
 	}
 	
+	/**
+	 * 搜索关键字
+	 */
 	public void seach(){
 		//String keyword = getRequest().getParameter("q");
 		String keyword = "";
