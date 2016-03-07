@@ -4,8 +4,7 @@
         var $wrap = $('#uploader'),
 
             // 图片容器
-            $queue = $( '<ul class="filelist"></ul>' )
-                .appendTo( $wrap.find( '.queueList' ) ),
+            $queue = $( '<ul class="filelist"></ul>' ).appendTo( $wrap.find( '.queueList' ) ),
 
             // 状态栏，包括进度和控制按钮
             $statusBar = $wrap.find( '.statusBar' ),
@@ -19,6 +18,7 @@
             // 没选择文件之前的内容。
             $placeHolder = $wrap.find( '.placeholder' ),
 
+            //进度条，未上传时先隐藏
             $progress = $statusBar.find( '.progress' ).hide(),
 
             // 添加的文件数量
@@ -139,32 +139,33 @@
 
         // 实例化
         uploader = WebUploader.create({
-            pick: {
-                id: '#filePicker',
-                label: '点击选择文件'
+            /*auto: true,*/// 选完文件后，是否自动上传。
+        	pick: {							// 选择文件的按钮
+                id: '#filePicker',		// 按钮id
+                label: '点击选择文件'	//按钮显示的文字
             },
-            formData: {
+            formData: { //文件上传请求的参数表，每次发送都会发送此对象中的参数，默认{}
                 uid: 123
             },
-          /*  dnd: '#dndArea',*/ //启用拖拽模式
+            dnd: '#dndArea', //启用拖拽模式
             paste: '#uploader',
             swf: 'webuploader/dist/Uploader.swf',
-            chunked: false,
-            chunkSize: 512 * 1024,
-            server: 'uploadServlet',
-            // runtimeOrder: 'flash',
-
-            // accept: {
+            chunked: true,				//是否要分片处理大文件上传，默认false
+            chunkSize: 5242880 * 5,	//分片大小，默认5M
+            server: 'uploadServlet', 	//执行上传操作URL
+            // runtimeOrder: 'flash',//指定运行时启动顺序，默认html5->flash
+            
+            // accept: {				 // 限制上传文件类型
             //     title: 'Images',
             //     extensions: 'gif,jpg,jpeg,bmp,png',
             //     mimeTypes: 'image/*'
             // },
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
-            disableGlobalDnd: true,
-            fileNumLimit: 300,
-            fileSizeLimit: 200 * 1024 * 1024,    // 200 M
-            fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
+            disableGlobalDnd: true
+           /* fileNumLimit: 300,*///限制上传文件总数量，默认undefined
+           /* fileSizeLimit: 200 * 1024 * 1024,  */  // 200 M 限制上传文件总大小，默认undefined
+            /*fileSingleSizeLimit: 50 * 1024 * 1024*/    // 50 M 限制单个上传文件大小，默认undefined
         });
 
         // 拖拽时不接受 js, txt 文件。

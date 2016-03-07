@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebRoot/index.jsp=UTF-8
+encoding//WebRoot/webuploader=UTF-8
 encoding//WebRoot/webuploader/dist/webuploader.js=UTF-8
 encoding//WebRoot/webuploader/examples/image-upload/upload.js=UTF-8
+encoding//WebRoot/webuploader/examples/md5-demo/script.js=UTF-8
+encoding//WebRoot/webuploader/examples/requirejs/app.js=UTF-8
 encoding//WebRoot/webuploader/server/preview.php=UTF-8

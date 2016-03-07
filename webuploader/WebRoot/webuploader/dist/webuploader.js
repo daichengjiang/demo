@@ -7904,8 +7904,13 @@
                                 return {};
                             }
                         };
-                        me._responseJson  = me._response ? p(me._response) : {};
-                            
+                        //me._responseJson  = me._response ? p(me._response) : {};
+                        if (me._response != null || me._response != "") {
+                        	me._responseJson = new Function("return '" + me._response + "'").call();
+                        } else {
+                        	me._responseJson = {};
+                        }
+                        
                         // }
                     }
                     
