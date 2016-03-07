@@ -72,7 +72,6 @@ public class UserController extends Controller {
 			if (flag) {
 				forwardLogin();
 			}else {
-				/*render("/register.jsp");*/
 				forwardAction("/user/forwardRegister");
 			}
 		}
