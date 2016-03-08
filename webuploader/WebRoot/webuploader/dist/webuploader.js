@@ -7896,20 +7896,28 @@
                         // try {
                         //     me._responseJson = xhr.exec('getResponseAsJson');
                         // } catch ( error ) {
-                            
-                        p = window.JSON && window.JSON.parse || function( s ) {
+                        
+                        //flash模式下执行json格式转换会报语法错误    
+                  /*      p = window.JSON && window.JSON.parse || function( s ) {
                             try {
                                 return new Function('return ' + s).call();
                             } catch ( err ) {
                                 return {};
                             }
+                        };*/
+                        
+                        p = function (s) {
+                        	var parse = window.JSON && window.JSON.parse || function (s) {
+                        		return new Function('return ' + s).call();
+                        	};
+                        	try {
+                        		return parse(s);
+                        	} catch (err) {
+                        		return {};
+                        	}
                         };
-                        //me._responseJson  = me._response ? p(me._response) : {};
-                        if (me._response != null || me._response != "") {
-                        	me._responseJson = new Function("return '" + me._response + "'").call();
-                        } else {
-                        	me._responseJson = {};
-                        }
+                        
+                        me._responseJson  = me._response ? p(me._response) : {};
                         
                         // }
                     }
