@@ -7,6 +7,7 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.demo.controller.AjaxCheckController;
+import com.jfinal.demo.controller.ManagerController;
 import com.jfinal.demo.controller.UserController;
 import com.jfinal.demo.handler.ResourceHandler;
 import com.jfinal.demo.interceptor.AuthInterceptor;
@@ -32,11 +33,8 @@ public class MyJFinalConfig extends JFinalConfig{
 	 * 此方法用于：配置JFinal访问路由
 	 */
 	public void configRoute(Routes me){
-		//前端路由
-		//me.add(new FrontRoutes());
-		//后端路由
-		//me.add(new AdminRoutes());
 		me.add("/user", UserController.class);
+		me.add("/mgr", ManagerController.class);
 		me.add("/ajaxcheck", AjaxCheckController.class);
 	}
 	

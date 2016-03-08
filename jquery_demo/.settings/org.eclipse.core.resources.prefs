@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding//WebRoot/bower_components/bootstrap-table/bootstrap-table.js=UTF-8
+encoding//WebRoot/js/validateEngine=UTF-8
 encoding//WebRoot/js/validateEngine/jquery.validationEngine-zh_CN.js=UTF-8
 encoding//WebRoot/login.jsp=UTF-8
-encoding//WebRoot/pages/autocomplete.jsp=UTF-8
+encoding//WebRoot/mgr/autocomplete.jsp=UTF-8
+encoding//WebRoot/webuploader=UTF-8

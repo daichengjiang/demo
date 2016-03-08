@@ -38,7 +38,10 @@ public class AjaxCheckController extends Controller{
 			//返回json数据字符串
 			StringBuffer jsonText = new StringBuffer("[");
 			//循环遍历唯一项校验
-			for (int i = 0; i < attrNames.length-1; i++) {
+			for (int i = 0; i < attrNames.length; i++) {
+				if ("password".equals(attrNames[i])) {
+					continue;
+				}
 				String str = checkout(attrNames[i], attrValues[i].toString());
 				jsonText.append(str + ",");
 			}

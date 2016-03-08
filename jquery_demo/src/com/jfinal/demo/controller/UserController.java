@@ -48,7 +48,7 @@ public class UserController extends Controller {
 	 * 跳转到后台管理页面
 	 */
 	public void forwardMgr(){
-		redirect("/pages/index.jsp");
+		redirect("/mgr/index.jsp");
 	}
 	
 	

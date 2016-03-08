@@ -10,14 +10,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>Register</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<link href="${basePath}css/style.css" rel='stylesheet' type='text/css' />
-	<link href="${basePath}css/validationEngine.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<link href="css/style.css" rel='stylesheet' type='text/css' />
+	<link href="css/validationEngine.css" rel='stylesheet' type='text/css' />
   	<style type="text/css">
   		body{
   			margin:0;
@@ -80,15 +77,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 			 <!-----//end-main---->
 	
-	<script type="text/javascript" src="${basePath}js/jquery-2.2.0.min.js"></script>
-  	<script type="text/javascript" src="${basePath}js/validateEngine/jquery.validationEngine-zh_CN.js"></script>
-  	<script type="text/javascript" src="${basePath}js/validateEngine/jquery.validationEngine.js"></script>
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.placeholder.js"></script>
+  	<script type="text/javascript" src="js/validateEngine/jquery.validationEngine-zh_CN.js"></script>
+  	<script type="text/javascript" src="js/validateEngine/jquery.validationEngine.js"></script>
  	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>		 
-	<script>
-		
-		  
-		jQuery(document).ready(function(){
-			  jQuery('#form_id').validationEngine({
+	<script type="text/javascript">
+	jQuery(function(){
+			// Invoke the plugin
+	        $('input, textarea').placeholder();
+			
+			  $('#form_id').validationEngine({
 			    relative : true,
 				ajaxFormValidation : true,
 				ajaxFormValidationMethod : 'post',

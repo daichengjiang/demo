@@ -10,17 +10,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>Login</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<link href="${basePath}css/style.css" rel='stylesheet' type='text/css' />
-	<link href="${basePath}css/validationEngine.css" rel='stylesheet' type='text/css' />
-  	<script type="text/javascript" src="${basePath}js/jquery-2.2.0.min.js"></script>
-  	<script type="text/javascript" src="${basePath}js/validateEngine/jquery.validationEngine-zh_CN.js"></script>
-  	<script type="text/javascript" src="${basePath}js/validateEngine/jquery.validationEngine.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<link href="css/style.css" rel='stylesheet' type='text/css' />
+	<link href="css/validationEngine.css" rel='stylesheet' type='text/css' />
+	
+	<!-- Jquery 2.0以上就不再支持IE 6/7/8 -->
+  	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+  	<script src="js/jquery.placeholder.js"></script>
+  	<script type="text/javascript" src="js/validateEngine/jquery.validationEngine-zh_CN.js"></script>
+  	<script type="text/javascript" src="js/validateEngine/jquery.validationEngine.js"></script>
  	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
   	<style type="text/css">
   		body{
@@ -72,7 +72,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	</style>
   </head>
   <script type="text/javascript">
-  	$(function(){
+  $(function(){
+  		// Invoke the plugin
+        $('input, textarea').placeholder();
+  		
   		$('#form_id').validationEngine();
   		
   		var message = '${message}';
