@@ -119,6 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<img src="${basePath}images/user.png" alt=""/>
 					</div>
 					<form action="${basePath}user/login.htm" method="post" id="form_id">
+					<!-- <div id = form_id> -->
 						 <div style="height:44px;margin-bottom: 20px;">
 						 	<input id="username" name="username" type="text" class="validate[required]" placeholder="用户名" />
 						 </div>
@@ -130,6 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>	
 					<p><a href="#">忘记密码</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="${basePath}user/forwardRegister.htm" >注册</a></p>
 				</form>
+				<!-- </div> -->
 			</div>
 			<!--//End-login-form-->
 			 <!-----start-copyright---->

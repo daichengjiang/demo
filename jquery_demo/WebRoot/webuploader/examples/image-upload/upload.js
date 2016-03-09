@@ -150,9 +150,9 @@
             dnd: '#dndArea', //启用拖拽模式
             paste: '#uploader',
             swf: 'webuploader/dist/Uploader.swf',
-            chunked: true,				//是否要分片处理大文件上传，默认false
+            chunked: false,				//是否要分片处理大文件上传，默认false
             chunkSize: 5242880 * 5,	//分片大小，默认5M
-            server: 'uploadServlet', 	//执行上传操作URL
+            server: 'mgr/upload.htm', 	//执行上传操作URL
             // runtimeOrder: 'flash',//指定运行时启动顺序，默认html5->flash
             
             // accept: {				 // 限制上传文件类型

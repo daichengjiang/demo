@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <script type="text/javascript">
   	$(function(){
-  		/* autocomplete依赖JQuery版本：1.2.6+ 
+  		/* autocomplete依赖JQuery版本：1.2.6+ （目前该插件已停止更新，后续版本已整合到jQueryUI）
 				注意事项：
 					1.依赖jQuery最高只能到1.8.3版本，原因：新版本的jQuery去掉了$.browser方法，导致该插件不能正常使用。
 						如需使用高版本jQuery，可以在jquery.autocomplete.js源码的最上方添加$.browser = navigator.userAgent;这行代码
@@ -129,9 +129,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var d = data;
 				for(var i=0; i<d.length; i++){
 					rows[rows.length] = {
-						data:d[i],
-						value:d[i],
-						result:d[i]
+						data:d[i],		//每条数据对象
+						value:d[i],		//与输入的值比较的数据  
+						result:d[i]		//选中的实际数据 
 					};
 				}
 					return rows;
@@ -140,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					return row;
 				}
 			}).result(function(event, data, formatted) {
-				alert(data);
+				
 			});
   		});
   </script>
@@ -149,8 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <div style="margin:0 auto;width:300px;">
 	   	<form  id="seach_form">
 		        <div class="input-group" >
-		            关键字：<input type="text" id="keyword" name="keyword" placeholder="用户名" style="width:200px;"><br />
-		            <a href="http://blog.csdn.net/iamagril/article/details/48370123">不支持高版本jQuery解决方案</a>
+		            用户名：<input type="text" id="keyword" name="keyword" placeholder="用户名" style="width:200px;"><br />
 		        </div>
 	        </form>
 	    </div>
