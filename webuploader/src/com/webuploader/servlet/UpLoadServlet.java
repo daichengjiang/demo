@@ -60,10 +60,6 @@ public class UpLoadServlet extends HttpServlet {
          * 按理来说 当上传一个文件时，其实是上传了两份，第一个是以 .tem 格式的  
          * 然后再将其真正写到 对应目录的硬盘上 
          */  
-        
-        
-
-   
         try {
             boolean isMultipart = ServletFileUpload.isMultipartContent(request);
  
@@ -89,17 +85,19 @@ public class UpLoadServlet extends HttpServlet {
             	ServletFileUpload upload = new ServletFileUpload(factory);  
                 // 得到所有的表单域，它们目前都被当作FileItem
                 List<FileItem> fileItems = upload.parseRequest(request);
- 
-                String id = "";
+                //上传文件名
                 String fileName = "";
-                // 如果大于1说明是分片处理
-                int chunks = 1;
+                //标识唯一的id
+                String guid = "";
+                // 总分片数
+                int chunks = 0;
+                //标识当前分片在上传分片中的顺序（从0开始）
                 int chunk = 0;
                 FileItem tempFileItem = null;
- 
+                //遍历获取表单域中的部分值
                 for (FileItem fileItem : fileItems) {
-                    if (fileItem.getFieldName().equals("id")) {
-                        id = fileItem.getString();
+                    if (fileItem.getFieldName().equals("guid")) {
+                        guid = fileItem.getString();
                     } else if (fileItem.getFieldName().equals("name")) {
                         fileName = new String(fileItem.getString().getBytes("ISO-8859-1"), "UTF-8");
                     } else if (fileItem.getFieldName().equals("chunks")) {
@@ -110,26 +108,22 @@ public class UpLoadServlet extends HttpServlet {
                         tempFileItem = fileItem;
                     }
                 }
-                
-              
-                
                 // 临时目录用来存放所有分片文件
                 String tempFileDir = path + File.separator + "part";
                 File parentFileDir = new File(tempFileDir);
                 if (!parentFileDir.exists()) {
-                	   //FileUtils.deleteDirectory(parentFileDir);
                 	   parentFileDir.mkdirs();
                 }
  
                 // 分片处理时，前台会多次调用上传接口，每次都会上传文件的一部分到后台(默认每片为5M)
-                File tempPartFile = new File(parentFileDir, fileName + "_" + chunk + ".part");
+                File tempPartFile = new File(parentFileDir, guid + "_" + chunk + ".part");
                 FileUtils.copyInputStreamToFile(tempFileItem.getInputStream(),tempPartFile);
                 
                 // 是否全部上传完成
                 // 所有分片都存在才说明整个文件上传完成
                 boolean uploadDone = true;
                 for (int i = 0; i < chunks; i++) {
-                    File partFile = new File(parentFileDir, fileName + "_" + i + ".part");
+                    File partFile = new File(parentFileDir, guid + "_" + i + ".part");
                     if (!partFile.exists()) {
                         uploadDone = false;
                     }
@@ -139,8 +133,8 @@ public class UpLoadServlet extends HttpServlet {
                 if (uploadDone) {
                     File destTempFile = new File(path, fileName);
                     for (int i = 0; i < chunks; i++) {
-                        File partFile = new File(parentFileDir, fileName + "_" + i + ".part");
- 
+                        File partFile = new File(parentFileDir, guid + "_" + i + ".part");
+                        
                         FileOutputStream destTempfos = new FileOutputStream(destTempFile, true);
  
                         FileUtils.copyFile(partFile, destTempfos);
@@ -153,9 +147,7 @@ public class UpLoadServlet extends HttpServlet {
               	  // 删除临时目录中的分片文件
                     FileUtils.deleteDirectory(parentFileDir);
                     // 删除临时文件
-                   // destTempFile.delete();
                     FileUtils.deleteDirectory(tpfFile);
-                     
                     request.getSession().removeAttribute("tempDIR");
                 } else {
                     // 临时文件创建失败
@@ -166,8 +158,6 @@ public class UpLoadServlet extends HttpServlet {
             }
         } catch (Exception e) {
         	e.printStackTrace();
-        }finally{
-        	
         }
   /*      try {  
             //可以上传多个文件  

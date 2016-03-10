@@ -144,14 +144,16 @@
                 id: '#filePicker',		// 按钮id
                 label: '点击选择文件'	//按钮显示的文字
             },
-            formData: { //文件上传请求的参数表，每次发送都会发送此对象中的参数，默认{}
-                uid: 123
+            //由于Http的无状态特征，在往服务器发送数据过程传递一个进入当前页面是生成的GUID作为标示
+            formData: {
+            	guid: WebUploader.Base.guid()
             },
             dnd: '#dndArea', //启用拖拽模式
             paste: '#uploader',
             swf: 'webuploader/dist/Uploader.swf',
             chunked: true,				//是否要分片处理大文件上传，默认false
-            chunkSize: 5242880 * 5,	//分片大小，默认5M
+            chunkSize: 524288 * 5,	//分片大小，默认5M
+            threads: 1,//上传并发数
             server: 'uploadServlet', 	//执行上传操作URL
             // runtimeOrder: 'flash',//指定运行时启动顺序，默认html5->flash
             
