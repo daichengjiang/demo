@@ -126,13 +126,14 @@ public class UserController extends Controller {
 	 * 搜索关键字
 	 */
 	public void seach(){
-		//String keyword = getRequest().getParameter("q");
 		String keyword = "";
-		try {
+		keyword = getRequest().getParameter("q");
+		//由于autocomplete默认以get方式提交，而get提交中文时会以ISO8859-1编码传递到后台，所有后台需要解码。
+		/*try {
 			keyword = new String(getRequest().getParameter("q").getBytes("iso8859-1"),"utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
-		}
+		}*/
 		String sql = "select username from sys_user where 1=1 ";
 		if (keyword != "" && keyword != null) {
 			sql += "and username like '" + keyword + "%'";

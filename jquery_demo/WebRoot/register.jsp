@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<form action="${basePath}user/register.htm" method="post" id="form_id" >
 						 <div style="height:44px;margin-bottom: 20px;">
-						 	<input id="username" name="user.username" type="text" class="validate[required,custom[onlyLetterNumber],ajax[checkIsExist]]" placeholder="用户名" />
+						 	<input id="username" name="user.username" type="text" class="validate[required,custom[onlyLetterNumber],funcCall[check],ajax[checkIsExist]]" placeholder="用户名" />
 						 </div>
 						 <div  style="height:44px;margin-bottom: 20px;">
 						 	<input id="password" name="user.password" type="password" class="validate[required,minSize[6],custom[onlyLetterNumber]]" placeholder="密码" />
@@ -122,6 +122,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				  }
 				};
 		});
+		
+		//自定义外部验证，使用funcCall[functionName]
+		//field 当前元素
+		//rules 当前元素定义的所有校验
+		function check(field, rules, i, options){
+			//alert(field.val() + "======>" + rules + "======>" + i + "======>" + options );
+			if("admin" == field.val()){
+				return "* 允许";
+			}else{
+				return "* 不允许";
+			}
+		}
+	
 	</script>
 </body>
 </html>

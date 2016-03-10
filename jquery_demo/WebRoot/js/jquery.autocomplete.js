@@ -9,7 +9,7 @@
  *
  * Revision: $Id: jquery.autocomplete.js 15 2009-08-22 10:30:27Z joern.zaefferer $
  */
-$.browser = navigator.userAgent; /*用于支持高版本jQuery解决办法*/
+/*$.browser = navigator.userAgent; *//*用于支持高版本jQuery解决办法*/
 ;(function($) {
 	
 $.fn.extend({
@@ -734,8 +734,8 @@ $.Autocompleter.Select = function (options, input, select, config) {
 					maxHeight: options.scrollHeight,
 					overflow: 'auto'
 				});
-                if($.browser.msie && ((typeof document.body.style.maxHeight === "undefined") || (document.body.style.maxHeight == ''))) {
-               /* if($.browser.msie && typeof document.body.style.maxHeight === "undefined") {*/
+               /* if($.browser.msie && ((typeof document.body.style.maxHeight === "undefined") || (document.body.style.maxHeight == ''))) {*/
+                if($.browser.msie && typeof document.body.style.maxHeight === "undefined") {
 					var listHeight = 0;
 					listItems.each(function() {
 						listHeight += this.offsetHeight;
