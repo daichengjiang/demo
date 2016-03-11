@@ -54,16 +54,16 @@ public class UpLoadServlet extends HttpServlet {
         //获取文件需要上传到的路径  
         String path = request.getRealPath("/upload");  
         try {
-        	  String tp =   path+File.separator+new Date().getTime();
-        	  Object attribute = request.getSession().getAttribute("tempDIR");
+        	  //设置临时文件目录位置
+        	  String tempDir =   path+File.separator+new Date().getTime();
+        	  Object attribute = request.getSession().getAttribute("tempDir");
         	  if(attribute==null){
-        		  request.getSession().setAttribute("tempDIR",tp);
+        		  request.getSession().setAttribute("tempDir",tempDir);
         	  }else{
-        		  tp = (String) attribute;
+        		  tempDir = (String) attribute;
         	  }
-        	File  tpfFile = new File(tp);
+        	File  tpfFile = new File(tempDir);
         	if(!tpfFile.exists()){
-        		//  FileUtils.deleteDirectory(tpfFile);
         		tpfFile.mkdirs();
         	}
         	//如果没以下两行设置的话，上传大的 文件 会占用 很多内存，  
@@ -89,7 +89,7 @@ public class UpLoadServlet extends HttpServlet {
             //标识当前分片在上传分片中的顺序（从0开始）
             int chunk = 0;
             FileItem tempFileItem = null;
-            //遍历获取表单域中的部分值
+            //遍历表单域，获取需要的信息
             for (FileItem fileItem : fileItems) {
                 if (fileItem.getFieldName().equals("guid")) {
                     guid = fileItem.getString();
