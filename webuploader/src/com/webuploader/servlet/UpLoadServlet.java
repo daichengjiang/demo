@@ -143,7 +143,7 @@ public class UpLoadServlet extends HttpServlet {
                         FileUtils.deleteDirectory(parentFileDir);
                         // 删除临时文件目录
                         FileUtils.deleteDirectory(tpfFile);
-                        request.getSession().removeAttribute("tempDIR");
+                        request.getSession().removeAttribute("tempDir");
                     } else {
                         // 临时文件创建失败
                         if (chunk == chunks -1) {
