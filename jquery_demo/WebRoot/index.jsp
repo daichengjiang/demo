@@ -18,7 +18,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/style1.css" rel="stylesheet" type="text/css" />
 	<!-- start js -->
 	<script type="text/javascript" src="js/jquery-1.6.min.js"></script>
-	<!-- <script src="js/jquery.placeholder.js"></script> -->
 </head>
 <body>
 <!-- start header -->
@@ -60,12 +59,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<h2>the bloom story </h2>
 			<h3>some things you should know about us</h3>
 		</div>	
-		<div class="content_bg">
-			<div class="main_pic">
-				<a class="btn" href="#" > from humble beginnings </a>
-			</div>
-		</div>	
-		 <div class="clear"></div>
 	</div>
 </div>
 </div>
@@ -77,13 +70,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="wrap">
 <div class="wrapper">
 	<div class="footer">
-		<!-- scroll_top_btn -->
-	    <script type="text/javascript">
-	   /*  $(function() {
-			// Invoke the plugin
-	        $('input, textarea').placeholder();
-		}); */
-		</script>
 		 <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
 		<!--end scroll_top_btn -->
 		<div class="footer_nav">
@@ -99,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<h1><a href="index.html"><img src="images/logo1.png" alt=""/></a></h1>
 		</div>
 		<div class="copy">
-			<p class="link"><span> <img src="images/copy.png" alt=""/ >Copyright &copy; 2016.Company name All rights reserved.</span></p>
+			<p class="link"><span> <img src="images/copy.png" alt="" />Copyright &copy; 2016.Company name All rights reserved.</span></p>
 		</div>
 		<div class="clear"></div>
 	</div>

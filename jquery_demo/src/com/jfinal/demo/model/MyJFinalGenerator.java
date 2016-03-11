@@ -33,7 +33,6 @@ public class MyJFinalGenerator {
 		// 创建生成器
 		Generator gernerator = new Generator(getDataSource(), baseModelPackageName, baseModelOutputDir, modelPackageName, modelOutputDir);
 		// 添加不需要生成的表名
-		gernerator.addExcludedTable("sys_code");
 		gernerator.addExcludedTable("sys_menu");
 		// 设置是否在 Model 中生成 dao 对象
 		gernerator.setGenerateDaoInModel(true);
