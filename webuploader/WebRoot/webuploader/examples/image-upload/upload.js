@@ -251,7 +251,7 @@
                 uploader.makeThumb( file, function( error, src ) {
                 	
                 	if(file.type.match('image/') == null){
-                		$wrap.text( '压缩文件不能预览' );
+                		$wrap.text( '非图片文件不能预览' );
                 		return;
                 	}
                 	
@@ -375,52 +375,51 @@
             $li.off().find('.file-panel').off().end().remove();
         }
 
+        //更新总进度
         function updateTotalProgress() {
             var loaded = 0,
                 total = 0,
                 spans = $progress.children(),
                 percent;
-
             $.each( percentages, function( k, v ) {
                 total += v[ 0 ];
                 loaded += v[ 0 ] * v[ 1 ];
             } );
-
             percent = total ? loaded / total : 0;
-
-
             spans.eq( 0 ).text( Math.round( percent * 100 ) + '%' );
             spans.eq( 1 ).css( 'width', Math.round( percent * 100 ) + '%' );
             updateStatus();
         }
 
+        //更新当前状态红色提示
         function updateStatus() {
             var text = '', stats;
 
             if ( state === 'ready' ) {
-                text = '选中' + fileCount + '张图片，共' +
+                text = '选中' + fileCount + '份文件，共' +
                         WebUploader.formatSize( fileSize ) + '。';
             } else if ( state === 'confirm' ) {
                 stats = uploader.getStats();
                 if ( stats.uploadFailNum ) {
-                    text = '已成功上传' + stats.successNum+ '张照片至XX相册，'+
-                        stats.uploadFailNum + '张照片上传失败，<a class="retry" href="#">重新上传</a>失败图片或<a class="ignore" href="#">忽略</a>'
+                    text = '已成功上传' + stats.successNum+ '份文件，'+
+                        stats.uploadFailNum + '份文件上传失败，<a class="retry" href="#">重新上传</a>失败文件或<a class="ignore" href="#">忽略</a>'
                 }
-
+                
             } else {
                 stats = uploader.getStats();
-                text = '共' + fileCount + '张（' +
+                text = '共' + fileCount + '份（' +
                         WebUploader.formatSize( fileSize )  +
-                        '），已上传' + stats.successNum + '张';
+                        '），已上传' + stats.successNum + '份';
 
                 if ( stats.uploadFailNum ) {
-                    text += '，失败' + stats.uploadFailNum + '张';
+                    text += '，失败' + stats.uploadFailNum + '份';
                 }
             }
 
             $info.html( text );
         }
 
+        //设置上传状态并更改按钮名称
         function setState( val ) {
             var file, stats;
 
@@ -485,6 +484,81 @@
             updateStatus();
         }
 
+        /**
+         * 扩展md5逻辑
+         * method:before-send-file
+         * 在文件发送之前request，此时还没有分片（如果配置了分片的话），可以用来做文件整体md5验证。
+         * para:file: File对象
+         *//*
+        uploader.register({
+            'before-send-file' : 'preupload'
+        }, {
+            preupload : function(file) {
+                $('#uploadBtn').attr("disabled",true);
+                var me = this, 
+                owner = this.owner, 
+                server = me.options.server, 
+                deferred = WebUploader.Deferred(), 
+                blob = file.source.getSource();
+                //var fileMd5 = file.wholeMd5;
+                var start =  +new Date();
+                var $li = $('#' + file.id), 
+                $MD5Percent = $li.find('.progress  .progress-bar-info');
+                $li.find('span.state').text('计算MD5');
+                insertLog("<br>"+moment().format("YYYY-MM-DD HH:mm:ss")+" before-send-file  preupload:开始计算文件("+file.name+")MD5. ");
+                owner.md5File( file )           
+                .progress(function(percentage) {   // 及时显示进度             
+                    var percent = parseInt(percentage * 100 ) + '%';
+                    $MD5Percent.css('width', percent);
+                    $MD5Percent.html(percent);
+                    //console.log('Percentage:', percent);
+                })               
+                .then(function(fileMd5) {   // 完成              
+                    var end = +new Date();
+                   // console.log("before-send-file  preupload: file.size="+file.size+" file.md5="+fileMd5);
+                    insertLog("<br>"+moment().format("YYYY-MM-DD HH:mm:ss")+" before-send-file  preupload:计算文件("+file.name+")MD5完成. 耗时  " + (end - start) + '毫秒  fileMd5: ' + fileMd5);
+                    file.wholeMd5 = fileMd5;
+                    $.ajax({
+                        cache : false,                  
+                        type : "post",
+                        dataType : "json",
+                        url : baseUrl + "/fileUpload/existsMd5",
+                        data : {
+                            fileMd5 : fileMd5,
+                            fileName : file.name,
+                            isShared : $("#isShared").val()
+                        },
+                        success : function(result) {
+                                $('#uploadBtn').attr("disabled",false);
+                                me.options.formData.fileMd5 = fileMd5;
+                                me.options.formData.isShared = $("#isShared").val();
+                                me.options.formData.fileType = $("#fileType").val();
+                                if (result.result) {//文件存在
+                                    insertLog("<br>"+moment().format("YYYY-MM-DD HH:mm:ss")+" before-send-file  preupload:文件 "+file.name + " 已经存在，跳过上传   fileMd5:"+fileMd5);
+                                    $MD5Percent.hide();
+                                    var $li = $('#' + file.id), 
+                                    $percent = $li.find('.progress  .progress-bar-success');
+                                    $li.find('span.state').text('文件重复，已跳过');
+                                    $percent.css('width', 100 + '%');
+                                    owner.skipFile(file);
+                                }else{//文件不存在
+                                    file.wholeMd5 = fileMd5;
+                                    file.chunkMd5s = result.chunkMd5s;  //如果后台已经有该文件的分片记录
+                                }
+                                // me.data.chunksMd5 = "chunksMd5";
+                                $('#' + file.id+' .cancleBtn').removeClass("btn-info");
+                                $('#' + file.id+' .cancleBtn').attr("disabled",true);
+                                deferred.resolve(true);
+                                // return deferred.reject();
+                        }
+                    });
+                });
+                return deferred.promise();
+            }
+        });*/
+        
+        
+        
         uploader.onUploadProgress = function( file, percentage ) {
             var $li = $('#'+file.id),
                 $percent = $li.find('.progress span');
@@ -543,17 +617,29 @@
             alert( 'Eroor: ' + code );
         };
 
+        /**
+         * 注册上传按钮点击事件
+         * ready：准备就绪，按钮操作（开始上传）
+         * uploading：上传中，按钮操作（暂停上传）
+         * paused：已暂停，按钮操作（继续上传）
+         */
         $upload.on('click', function() {
             if ( $(this).hasClass( 'disabled' ) ) {
                 return false;
             }
-
             if ( state === 'ready' ) {
                 uploader.upload();
             } else if ( state === 'paused' ) {
                 uploader.upload();
             } else if ( state === 'uploading' ) {
-                uploader.stop();
+            	
+            	/**
+            	 * 暂停上传，可传递一个参数
+            	 * stop() 暂停无效
+            	 * stop(true) 暂停正在上传操作
+            	 * stop(file) 暂停指定文件上传
+            	 */
+                uploader.stop(true);
             }
         });
 
