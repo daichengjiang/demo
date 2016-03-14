@@ -1,6 +1,5 @@
 package com.jfinal.demo.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 

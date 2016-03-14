@@ -47,5 +47,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
     </div>
+    <form id="showForm" action="jdbcServlet" method="post">
+    	<button type="submit" id="show" >查看圖片</button>
+    </form>
   </body>
+ <!--  <script type="text/javascript">
+  	$(function(){
+  		$("#show").click(function(){
+  			window.location.href = "${basePath}jdbcServlet";
+  		});
+  	});
+  </script> -->
+  
 </html>

@@ -16,8 +16,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
 	<link href="css/style1.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="css/index.css" />
 	<!-- start js -->
-	<script type="text/javascript" src="js/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+	<script type="text/javascript" src="js/index.js" ></script>
 </head>
 <body>
 <!-- start header -->
@@ -42,24 +44,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <!-- start slider -->
 <div class="slider_bg">
-<div class="wrap">
-	<div class="slider" id="home">
-		<div class="slider_text">
-			<h2>we are bloom</h2>
-			<h3>We do digital & we do it with a difference</h3>
+	<div class="wrap">
+		<div class="slider" id="home">
+			<div class="slider_text">
+				<h2>we are bloom</h2>
+				<h3>We do digital & we do it with a difference</h3>
+			</div>
 		</div>
-</div>
-</div>
+	</div>
 </div>
 <!-- start main -->
 <div class="main_bg">
 <div class="wrap">
-	<div class="main" id="about">
-		<div class="main_text">
-			<h2>the bloom story </h2>
-			<h3>some things you should know about us</h3>
-		</div>	
-	</div>
+	<center>
+		<div class="lest">
+			<div class="box1">
+				<a href="http://sc.chinaz.com/"><img src="images/1.jpg" alt="" /></a>
+			</div>
+			<div class="box2">
+				<a href="http://sc.chinaz.com/"><img src="images/2.jpg" alt="" /></a>
+			</div>
+			<div class="box3">
+				<a href="http://sc.chinaz.com/"><img src="images/3.jpg" alt="" /></a>
+			</div>
+			<div class="box4">
+				<a href="http://sc.chinaz.com/"><img src="images/4.jpg" alt="" /></a>
+			</div>
+			<div class="box5">
+				<a href="http://sc.chinaz.com/"><img src="images/5.jpg" alt="" /></a>
+			</div>
+			<div class="box6">
+				<a href="http://sc.chinaz.com/"><img src="images/6.jpg" alt="" /></a>
+			</div>
+			<div class="box7">
+				<a href="http://sc.chinaz.com/"><img src="images/1.jpg" alt="" /></a>
+			</div>
+			<div class="box8">
+				<a href="http://sc.chinaz.com/"><img src="images/2.jpg" alt="" /></a>
+			</div>
+			<div class="box9">
+				<a href="http://sc.chinaz.com/"><img src="images/3.jpg" alt="" /></a>
+			</div>
+		</div>
+	</center>
 </div>
 </div>
 <!-- start work-page -->

@@ -2,6 +2,11 @@ package com.webuploader.servlet;
 
 import java.io.*;  
 import java.rmi.Naming;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.List;  
   
@@ -164,10 +169,45 @@ public class UpLoadServlet extends HttpServlet {
                       FileUtils.deleteDirectory(tpfFile);
 	                  in.close();  
 	                  out.close();
+	                  
+	                  //连接MySql数据库
+	                  String url = "jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull" ;    
+	                  String username = "root" ;   
+	                  String password = "" ;
+	                  
+	                  try{   
+	                	  	Class.forName("com.mysql.jdbc.Driver");
+	                	    Connection con = DriverManager.getConnection(url,username,password );  
+	                	    String sql = "insert into sys_picture values(null,0,'','"+fileName+"',0,sysdate())";
+	                	    Statement stmt = con.createStatement();
+	                	    int result = stmt.executeUpdate(sql);
+	                	    if (result > 0) {
+								System.out.println("添加成功");
+							}
+						if (stmt != null) { // 关闭声明
+							try {
+								stmt.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+						}
+						if (con != null) { // 关闭连接对象
+							try {
+								con.close();
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+						}
+
+	                  }catch(SQLException se){   
+	                	    System.out.println("数据库连接失败！");   
+	                	    se.printStackTrace() ;   
+	                  }   
 				}
             }
         } catch (Exception e) {
         	e.printStackTrace();
         }
+        
     }  
 }  

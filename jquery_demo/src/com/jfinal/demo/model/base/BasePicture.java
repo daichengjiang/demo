@@ -17,12 +17,12 @@ public abstract class BasePicture<M extends BasePicture<M>> extends Model<M> imp
 		return get("picId");
 	}
 
-	public void setUserId(java.lang.Integer userId) {
-		set("userId", userId);
+	public void setClassifyId(java.lang.Integer classifyId) {
+		set("classifyId", classifyId);
 	}
 
-	public java.lang.Integer getUserId() {
-		return get("userId");
+	public java.lang.Integer getClassifyId() {
+		return get("classifyId");
 	}
 
 	public void setTitle(java.lang.String title) {

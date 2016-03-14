@@ -14,6 +14,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 
 import com.jfinal.core.Controller;
+import com.jfinal.demo.model.Classify;
+import com.jfinal.demo.model.User;
+import com.jfinal.kit.JsonKit;
 
 public class ManagerController extends Controller {
 	
@@ -151,6 +154,29 @@ public class ManagerController extends Controller {
 	        render("/mgr/webuploader.jsp");
 	}
 	
+	
+	/**
+	 *获取分类列表
+	 */
+	public void classifyList(){
+	      //获取需要展示的用户数据
+	      String sql = "select * from sys_classify";
+		  List<Classify> classifys = Classify.dao.find(sql);
+		  for (Classify classify : classifys) {
+			  if ("1".equals(classify.getStatus())) {
+				  classify.setStatus("正常");
+			}else {
+				classify.setStatus("禁用");
+			}
+			if (classify.getParentName() == null || "".equals(classify.getParentName())) {
+				classify.setParentName("-");
+			}
+		  }
+	      //转成Json格式
+	      String json = JsonKit.toJson(classifys);
+	      System.out.println(json);
+	      renderJson(json);
+	}
 	
 	
 }

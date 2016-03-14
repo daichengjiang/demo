@@ -10,4 +10,15 @@
    <servlet-name>UploadServlet</servlet-name>
    <url-pattern>/uploadServlet</url-pattern>
 </servlet-mapping>
+
+  <servlet>
+   <servlet-name>JdbcServlet</servlet-name>
+   <servlet-class>com.webuploader.servlet.JdbcServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+   <servlet-name>JdbcServlet</servlet-name>
+   <url-pattern>/jdbcServlet</url-pattern>
+</servlet-mapping>
+
 </web-app>

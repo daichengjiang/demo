@@ -16,8 +16,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
+	
 	<link rel="stylesheet" href="webuploader/css/webuploader.css"/>
 	<link rel="stylesheet" href="webuploader/examples/image-upload/style.css"/>
+	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	
 	<script type="text/javascript" src="webuploader/test/jquery-1.10.1.min.js"></script>
 	<script type="text/javascript" src="webuploader/dist/webuploader.js"></script>
 	<script type="text/javascript" src="webuploader/examples/image-upload/upload.js"></script>
@@ -27,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	<form action="${basePath}/mgr/upload.htm">
   		<div>
-  			<span>类型：</span> 
+  			<span>分类：</span> 
   			<select name="type">
   				<option value="0">请选择</option>
   				<option value="1">随拍</option>
